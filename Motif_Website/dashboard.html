@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Test</title>
-	<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+	<link href="file:///C|/Users/Anant/Downloads/Compressed/TinoHacks-Website-master/TinoHacks-Website-master/html5up-spectral/assets/css/main.css" rel="stylesheet" type="text/css">
 
 	<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase-auth.js"></script>
@@ -68,8 +68,9 @@
 		}
 
 		function createCard(name,message,link){
+			var date = "<h3>"+retDate()+" April 2017"+"</h3>"
 			return "<li class='icon fa-paper-plane-o'><h3>"+name+"</h3>\
-	<p>"+message+"</p>"+retLink(message)+"</li>";
+	<p>"+message+"</p>"+retLink(message)+date+"</li>";
 		}
 		function retLink(msg){
 			console.log("parsed");
@@ -93,6 +94,15 @@
 				}
 			}
 			return "";
+		}
+		function retDate(){
+			var d = new Date();
+			var n = d.getDate();
+			if(Math.random() < 0.5){
+				return n;
+			}else{
+				return n-1;
+			}
 		}
 
 	</script>
