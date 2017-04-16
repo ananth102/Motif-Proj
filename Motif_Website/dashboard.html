@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>Test</title>
-	<link href="assets/css/main.css" rel="stylesheet" type="text/css">
+	<link href="file:///C|/Users/Anant/Downloads/Compressed/TinoHacks-Website-master/TinoHacks-Website-master/html5up-spectral/assets/css/main.css" rel="stylesheet" type="text/css">
+
 	<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase-database.js"></script>
@@ -74,8 +75,15 @@
 		function retLink(msg){
 			console.log("parsed");
 			var query = prsString(msg);
-			var link = "https://www.google.com/maps/search/"+query+"/@37.553091,-122.3267554,10z/data=!3m1!4b1";
-			var finalString = "<a href='"+link + "'>"+query+"</a>";
+			query = query.trim();
+			var finalString = "";
+			if(goCheck(msg)){
+				var link = "https://www.google.com/maps/search/"+query+"/@37.553091,-122.3267554,10z/data=!3m1!4b1";
+				finalString = "<a href='"+link + "'>"+query+"</a>";
+			}else if(msg.indexOf("buy") != -1){
+				var link = "http://www.ebay.com/sch/i.html?_from=R40&_trksid=p2050601.m570.l1313.TR12.TRC2.A0.H0.X"+query+".TRS0&_nkw="+query+"&_sacat=0";
+				finalString = "<a href='"+link + "'>"+query+"</a>";
+			}
 			return finalString;
 		}
 		function prsString(msg){
@@ -92,6 +100,14 @@
 					return str;
 				}
 			}
+			if(str.indexOf("buy") != -1){
+					var nextIndex = str.indexOf(word) + 4;
+					for (var x = 0; x < nextIndex; x++){
+						str = str.replace(str[0], "");
+					}
+					str = str.trim();
+					return str;
+			}
 			return "";
 		}
 		function retDate(){
@@ -102,6 +118,9 @@
 			}else{
 				return n-1;
 			}
+		}
+		function goCheck(msg){
+			return msg.indexOf("meet") != -1 || msg.indexOf("go to") != -1 || msg.indexOf("will be at") != -1;
 		}
 
 	</script>
